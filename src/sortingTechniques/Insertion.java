@@ -4,7 +4,7 @@ package sortingTechniques;
 public class Insertion {
 	
 	
-	public void InsertionSort(int arr[])
+	public int[] InsertionSort(int arr[])
 	{
 		for(int i=0; i< arr.length ; i++)
 		{
@@ -19,12 +19,12 @@ public class Insertion {
 				}
 		}
 		
-		Print(arr);
+		return arr;
 	}
 	
 	public void Print(int arr[])
 	{
-        System.out.println("Insertion Sort Sorted array"); 
+        System.out.println("Sorted array"); 
 
 		for(int i=0; i< arr.length ; i++ )
 		{

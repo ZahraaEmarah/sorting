@@ -10,7 +10,7 @@ public class SelectionSort {
 	public void setSorted(int sorted[]) {
 		this.sorted = sorted;
 	}
-	public void selection()
+	public int[] selection()
 	{
 		int n=sorted.length;
 		for(int i=0;i<n;i++)
@@ -27,6 +27,8 @@ public class SelectionSort {
 				}
 			}
 		}
+		
+		return sorted;
 	}
 	public void print()
 	{
