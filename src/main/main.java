@@ -1,4 +1,6 @@
 package main;
+import java.util.Random;
+
 import sortingTechniques.Heap;
 import sortingTechniques.Insertion;
 import sortingTechniques.MergeSort;
@@ -8,7 +10,14 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		int arr[]= {9,4,6,10,99,0,100,44,78,1,8};
+		int arr[] = new int[50];
+		
+		Random rand = new Random();
+		for(int i=0; i<50; i++)
+		{
+			arr[i] = rand.nextInt(500);
+		}
+	
 		Heap heap= new Heap();
 		heap.setHeap(arr);
 		heap.Buildheap(arr);
