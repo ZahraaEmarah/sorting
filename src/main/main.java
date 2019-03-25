@@ -10,12 +10,13 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		int arr[] = new int[50];
+		Random r = new Random();
+		int arr[] = new int[r.nextInt(100)];
+		System.out.println("array length "+ arr.length);
 		
-		Random rand = new Random();
 		for(int i=0; i<arr.length ; i++)
 		{
-			arr[i] = rand.nextInt(500);
+			arr[i] = r.nextInt(500);
 		}
 	
 		Heap heap= new Heap();
