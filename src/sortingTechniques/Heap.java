@@ -50,10 +50,15 @@ public class Heap {
 	public void setHeap(int heap[]) {
 		this.heap = heap;
 	}
-	public void printHeap()
+	public int[] printHeap()
 	{
+		int[] res = new int[heapsize];	
 		for(int i=0;i<heapsize;i++)
-			System.out.println(Integer.toString(getHeap(i)));
+		{ 
+			res[i] = getHeap(i);
+		}
+		
+		return res;
 	}
 	
 

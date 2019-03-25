@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import sortingTechniques.Heap;
 import sortingTechniques.Insertion;
 import sortingTechniques.MergeSort;
 import sortingTechniques.SelectionSort;
@@ -141,6 +142,13 @@ public class Main {
 		JTextArea textArea_1 = new JTextArea();
 		scrollPane_1.setViewportView(textArea_1);
 		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(10, 442, 349, 40);
+		frame.getContentPane().add(scrollPane_4);
+		
+		JTextArea textArea_4 = new JTextArea();
+		scrollPane_4.setViewportView(textArea_4);
+		
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(10, 277, 349, 40);
@@ -163,6 +171,8 @@ public class Main {
 				textArea.setText("");
 				textArea_1.setText("");
 				textArea_2.setText("");
+				textArea_3.setText("");
+				textArea_4.setText("");
 
 				
 				Random r = new Random();
@@ -183,10 +193,22 @@ public class Main {
 				
 				size.setText(Integer.toString(arr.length));
 				
-				long start = System.currentTimeMillis(); 
+				long start = System.currentTimeMillis();
+				Heap heap= new Heap();
+				heap.setHeap(arr);
+				heap.Buildheap(arr);
+				long end = System.currentTimeMillis();
+			    int[] res0 = heap.printHeap();
+			    for(int i=0; i<res0.length ; i++)
+				{
+					textArea_4.append(Integer.toString(res0[i]) + " - ");
+				}
+			    textField_3.setText(Long.toString(end-start) + " ms");
+				
+			    start = System.currentTimeMillis(); 
 				Insertion insertion = new Insertion();
 				int[] res = insertion.InsertionSort(arr);
-				long end = System.currentTimeMillis();
+				end = System.currentTimeMillis();
 				textField_1.setText(Long.toString(end-start) + " ms");
 				for(int i=0; i<res.length ; i++)
 				{
@@ -233,12 +255,9 @@ public class Main {
 		lblHeapSort.setBounds(10, 408, 99, 23);
 		frame.getContentPane().add(lblHeapSort);
 		
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(10, 442, 349, 40);
-		frame.getContentPane().add(scrollPane_4);
+
 		
-		JTextArea textArea_4 = new JTextArea();
-		scrollPane_4.setViewportView(textArea_4);
+		
 		
 		JLabel lblBubbleSort = new JLabel("Bubble Sort:");
 		lblBubbleSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
