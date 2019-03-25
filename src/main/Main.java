@@ -7,9 +7,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import sortingTechniques.BubbleSort;
 import sortingTechniques.Heap;
 import sortingTechniques.Insertion;
 import sortingTechniques.MergeSort;
+import sortingTechniques.QuickSort;
 import sortingTechniques.SelectionSort;
 
 import javax.swing.JTextArea;
@@ -135,6 +137,13 @@ public class Main {
 		textField_5.setBounds(369, 598, 131, 40);
 		frame.getContentPane().add(textField_5);
 		
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(10, 518, 349, 40);
+		frame.getContentPane().add(scrollPane_5);
+		
+		JTextArea textArea_5 = new JTextArea();
+		scrollPane_5.setViewportView(textArea_5);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 201, 349, 40);
 		frame.getContentPane().add(scrollPane_1);
@@ -164,6 +173,14 @@ public class Main {
 		JTextArea textArea_3 = new JTextArea();
 		scrollPane_2.setViewportView(textArea_3);
 		
+
+		JScrollPane scrollPane_6 = new JScrollPane();
+		scrollPane_6.setBounds(10, 598, 349, 40);
+		frame.getContentPane().add(scrollPane_6);
+		
+		JTextArea textArea_6 = new JTextArea();
+		scrollPane_6.setViewportView(textArea_6);
+		
 		JButton btnSort = new JButton("Generate Array");
 		btnSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -173,67 +190,90 @@ public class Main {
 				textArea_2.setText("");
 				textArea_3.setText("");
 				textArea_4.setText("");
-
+				textArea_5.setText("");
+				textArea_5.setText("");
 				
 				Random r = new Random();
 				int arr[] = new int[r.nextInt(11000)];
 				
-				System.out.println("array length "+ arr.length);
-				
 				for(int i=0; i<arr.length ; i++)
 				{
-					arr[i] = r.nextInt(22000);
-				}
-				
-				for(int i=0; i<arr.length ; i++)
-				{
-					arr[i] = r.nextInt(500);
+					arr[i] = r.nextInt(10000);
 					textArea.append(Integer.toString(arr[i]) + " - ");
 				}
 				
 				size.setText(Integer.toString(arr.length));
 				
-				long start = System.currentTimeMillis();
+				////** HEAP SORT**////
+				long start = System.nanoTime();
 				Heap heap= new Heap();
 				heap.setHeap(arr);
 				heap.Buildheap(arr);
-				long end = System.currentTimeMillis();
+				long end = System.nanoTime();
 			    int[] res0 = heap.printHeap();
 			    for(int i=0; i<res0.length ; i++)
 				{
 					textArea_4.append(Integer.toString(res0[i]) + " - ");
 				}
-			    textField_3.setText(Long.toString(end-start) + " ms");
+			    textField_3.setText(Long.toString(end-start) + " ns");
 				
-			    start = System.currentTimeMillis(); 
+			    
+			    ////** INSERTION SORT**////
+			    start = System.nanoTime(); 
 				Insertion insertion = new Insertion();
 				int[] res = insertion.InsertionSort(arr);
-				end = System.currentTimeMillis();
-				textField_1.setText(Long.toString(end-start) + " ms");
+				end = System.nanoTime();
+				textField_1.setText(Long.toString(end-start) + " ns");
 				for(int i=0; i<res.length ; i++)
 				{
 					textArea_2.append(Integer.toString(res[i]) + " - ");
 				}
 				
-				start = System.currentTimeMillis(); 
+				
+			    ////** MERGE SORT**////
+				start = System.nanoTime(); 
 				MergeSort merge = new MergeSort();
 				int[] res1 = merge.MergeSort(arr);
-				end = System.currentTimeMillis();
-				textField.setText(Long.toString(end-start) + " ms");
+				end = System.nanoTime();
+				textField.setText(Long.toString(end-start) + " ns");
 				for(int i=0; i<res.length ; i++)
 				{
 					textArea_1.append(Integer.toString(res1[i]) + " - ");
 				}
 				
-				start = System.currentTimeMillis();
+				
+		     	////** SELECTION SORT**////
+				start = System.nanoTime();
 				SelectionSort selectionSort = new SelectionSort();
 				selectionSort.setSorted(arr);
 				int res2[] = selectionSort.selection();
-				end = System.currentTimeMillis();
-				textField_2.setText(Long.toString(end-start) + " ms");
+				end = System.nanoTime();
+				textField_2.setText(Long.toString(end-start) + " ns");
 				for(int i=0; i<res2.length ; i++)
 				{
 					textArea_3.append(Integer.toString(res2[i]) + " - ");
+				}
+				
+			    ////** BUBBLE SORT**////
+				start = System.nanoTime();
+				BubbleSort bubble = new BubbleSort();
+				int[] res3 = bubble.bubbleSort(arr);
+				end = System.nanoTime();
+				textField_4.setText(Long.toString(end-start) + " ns");
+				for(int i=0; i<res3.length ; i++)
+				{
+					textArea_5.append(Integer.toString(res3[i]) + " - ");
+				}
+				
+			    ////** QUICK SORT**////
+				start = System.nanoTime();
+				QuickSort quick = new QuickSort();
+				int[] res4 = quick.sort(arr);
+				end = System.nanoTime();
+				textField_5.setText(Long.toString(end-start) + " ns");
+				for(int i=0; i<res4.length ; i++)
+				{
+					textArea_6.append(Integer.toString(res4[i]) + " - ");
 				}
 			}
 		});
@@ -254,34 +294,16 @@ public class Main {
 		lblHeapSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHeapSort.setBounds(10, 408, 99, 23);
 		frame.getContentPane().add(lblHeapSort);
-		
-
-		
-		
-		
+	
 		JLabel lblBubbleSort = new JLabel("Bubble Sort:");
 		lblBubbleSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBubbleSort.setBounds(10, 493, 99, 14);
 		frame.getContentPane().add(lblBubbleSort);
 		
-		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(10, 518, 349, 40);
-		frame.getContentPane().add(scrollPane_5);
-		
-		JTextArea textArea_5 = new JTextArea();
-		scrollPane_5.setViewportView(textArea_5);
-		
 		JLabel lblQuickSort = new JLabel("Quick Sort:");
 		lblQuickSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblQuickSort.setBounds(10, 569, 99, 23);
 		frame.getContentPane().add(lblQuickSort);
-		
-		JScrollPane scrollPane_6 = new JScrollPane();
-		scrollPane_6.setBounds(10, 598, 349, 40);
-		frame.getContentPane().add(scrollPane_6);
-		
-		JTextArea textArea_6 = new JTextArea();
-		scrollPane_6.setViewportView(textArea_6);
 		
 		JLabel lblRunningTime = new JLabel("Running Time:");
 		lblRunningTime.setFont(new Font("Tahoma", Font.PLAIN, 14));
