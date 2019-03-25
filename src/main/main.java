@@ -13,7 +13,7 @@ public class main {
 		int arr[] = new int[50];
 		
 		Random rand = new Random();
-		for(int i=0; i<50; i++)
+		for(int i=0; i<arr.length ; i++)
 		{
 			arr[i] = rand.nextInt(500);
 		}
